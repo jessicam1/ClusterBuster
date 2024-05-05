@@ -11,4 +11,4 @@ FRQ=$5
 REF=$6
 OUTPUT=$7
 
-python outlier_detection.py --calls ${CALLS} --no_calls ${NO_CALLS} --missingness_threshold ${MISS} --outlier_threshold ${THRESH} --plink_freq ${FRQ} --reference_maf ${REF} --output ${OUTPUT}
+python src/outlier_detection.py --calls ${CALLS} --no_calls ${NO_CALLS} --missingness_threshold ${MISS} --outlier_threshold ${THRESH} --plink_freq ${FRQ} --reference_maf ${REF} --output ${OUTPUT}
