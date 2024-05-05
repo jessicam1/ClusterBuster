@@ -9,6 +9,6 @@ RELEASE_FILE=$3
 METRICS_DIR=$4
 OUTPUT_DIR=$5
 
-python create_data.py --ndd_genes ${NDD_GENES} --snps ${SNPS} --release_information ${RELEASE_FILE} --metrics_directory ${METRICS_DIR} --output_directory ${OUTPUT_DIR}
+python src/create_data.py --ndd_genes ${NDD_GENES} --snps ${SNPS} --release_information ${RELEASE_FILE} --metrics_directory ${METRICS_DIR} --output_directory ${OUTPUT_DIR}
 
 ### how to run
