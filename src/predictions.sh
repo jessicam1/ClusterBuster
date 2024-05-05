@@ -7,6 +7,6 @@ MODEL=$1
 INPUT_FILE=$2
 OUTPUT_FILE=$3
 
-python predictions.py --model ${MODEL} --input ${INPUT_FILE} --output ${OUTPUT_FILE}
+python src/predictions.py --model ${MODEL} --input ${INPUT_FILE} --output ${OUTPUT_FILE}
 
 ### how to run
