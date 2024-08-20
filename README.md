@@ -3,7 +3,7 @@
 ## A Machine Learning Algorithm for Genotyping SNPs from Raw Data
 
 ### Purpose
-Cluster Buster is a system for recovering the genotypes of no-call SNPs on the Neurobooster array after processing with Illumina Gencall. It is a neural network, outlier detection algorithm, and web app for visualizing SNP genotypes.
+Cluster Buster is a system for recovering the genotypes of no-call SNPs on the Neurobooster array after genotyping with Illumina Genome Studio. It is a neural network, genotype concordance analysis, and SNP genotype plotting system.
 
 ### How to Run
 A pipeline is conveniently provided in cluster_buster_pipeline.ipynb 
