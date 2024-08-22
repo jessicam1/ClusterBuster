@@ -1,17 +1,24 @@
 #!/bin/sh
-source /data/$USER/conda/etc/profile.d/conda.sh && source /data/$USER/conda/etc/profile.d/mamba.sh
-source myconda
-conda activate focalloss
 
-SNPS=$1
-PQS=$2
-TPROP=$3
-VPROP=$4
-TSAVE=$5
-VSAVE=$6
-HSAVE=$7
-NCSAVE=$8
+CONDA_PATH=$1
+MAMBA_PATH=$2
+ENV_NAME=$3
+
+source ${CONDA_PATH} 
+source ${MAMBA_PATH}
+conda activate ${ENV_NAME}
+
+
+SNPS=$4
+PQS=$5
+TPROP=$6
+VPROP=$7
+TSAVE=$8
+VSAVE=$9
+HSAVE=${10}
+NCSAVE=${11}
+SNPMAP=${12}
 
 
 python src/create_data.py --snp_list ${SNPS} --from_parquet ${PQS} --training_proportion ${TPROP} --validation_proportion ${VPROP}\
-    --save_train ${TSAVE} --save_validation ${VSAVE} --save_holdout ${HSAVE} --save_nocalls ${NCSAVE} --create_snp_categorical_map
+    --save_train ${TSAVE} --save_validation ${VSAVE} --save_holdout ${HSAVE} --save_no_calls ${NCSAVE} --output_snp_map ${SNPMAP}
