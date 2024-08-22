@@ -23,9 +23,6 @@ def parse_arguments():
         "proportion of data to make validation dataset (float from 0.00 to 1.00)."
         "default: 0.10.")
     )
-    parser.add_argument("-c", "--create_snp_categorical_map", action="store_true", help=(
-        "if flag is used, create categorical variable from snpID called snpID_cat")
-    )
     parser.add_argument("-u", "--use_snp_categorical_map", help=(
         "txt file containing snpID and corresponding categorical variable (snpID_cat).")
     )
@@ -33,6 +30,8 @@ def parse_arguments():
     parser.add_argument("--save_validation", help="path to save validation dataset, .csv or .parquet")
     parser.add_argument("--save_holdout", help="path to save holdout dataset, .csv or .parquet")
     parser.add_argument("--save_no_calls", help="path to save no calls dataset, .csv or .parquet")
+    parser.add_argument("--output_snp_map", help="CSV to save mapping of snpIDs to snp categorical variable")
+    
     return parser.parse_args()
 
 def get_dataframe_from_parquets(parquet_list, snp_list):
@@ -111,7 +110,9 @@ def main():
     if args.use_snp_categorical_map:
         with open(args.snp_map, 'r') as ids:
                snp_map = dict(line.strip().split(',') for line in ids)
-
+    else:
+        snp_map = {snp: idx for idx, snp in enumerate(snp_list)}
+        
     tr_num = args.training_proportion
     va_num = args.training_proportion + args.validation_proportion
     if va_num >= 1.0:
@@ -137,7 +138,7 @@ def main():
         training = get_dataframe_from_parquets(training_list, snp_list)
         training, train_nc = clean_data(training, snp_map=snp_map)
     else:
-        training = pd.DataFrame()  # Empty DataFrame to maintain consistency
+        training = pd.DataFrame()  
         train_nc = pd.DataFrame()
     
     if validation_list:
@@ -169,5 +170,14 @@ def main():
                 dataframe.to_parquet(save_arg)
             else:
                 dataframe.to_csv(save_arg, index=False)
+    
+
+    if args.output_snp_map:
+        snp_map_df = training[['snpID', 'snpID_cat']].drop_duplicates()
+        try:
+            snp_map_df.to_csv(args.output_snp_map, index=False, header=False)
+        except Exception as e:
+            print(f"Error saving SNP map CSV file {args.output_snp_map}: {e}", file=sys.stderr)
+            sys.exit(1)
 if __name__ == "__main__":
     main()
