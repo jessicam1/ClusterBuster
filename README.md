@@ -52,7 +52,7 @@ Outputs:<br>
        &nbsp;&nbsp;&nbsp;&nbsp;a directory for every snpID given, containing a PNG of predicted genotypes<br><br>
 #### Get Predictions Directly from Parquet Files 
 * Specify the Keras model with --model flag where {model} is the name of the Keras model.<br>
-* The Cluster Buster neural network requires a categorical (numerical) version of snpID called "snpID_cat" that is mapped the same way as the snpIDs during training. Specify the SNP mapping scheme with your own CSV (snpID, snpID_cat) or the CSV output from create_data.py.<br>
+* The Cluster Buster neural network requires a categorical (numerical) version of snpID called "snpID_cat" that is mapped the same way as the snpIDs during training. Specify the SNP mapping scheme with your own CSV (snpID, snpID_cat) or the txt file in the misc/ folder or the CSV output from create_data.py.<br>
 * If you want to get genotype predictions using Cluster Buster directly from parquet files, feed the --from_parquet flag a text file containing a list of parquet files {pq_list}.<br>
 * If you want to save these predictions to an aggregated CSV or parquet file, use --to_csv or --to_parquet.<br>
 * If you want to save the predictions for each parquet in their own, new parquet file, use --parquet_to_parquet. Fies are named "{original_pq_filename}_predictions.parquet" and saved to specified directory {predictions_directory}.<br>
