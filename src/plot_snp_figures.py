@@ -39,7 +39,7 @@ def parse_arguments():
         help=(
             "CSV to make plot annotations with. Must contain columns 'snpID', "
             "'GenTrain_Score', 'gene', rate of concordance with imputation "
-            "('concordance_imputed'), rate of concordance with WGS ('concordance_wgs')"
+            "('concordant_imputed'), rate of concordance with WGS ('concordant_wgs')"
         )
     )
     parser.add_argument(
@@ -315,8 +315,8 @@ def plot_combined_snp_plots(data, result_frame, snp_id, gene, calls, output_file
             # visible='legendonly'
         )
 
-    wgs_concordance = float(result_frame['concordance_wgs'].iloc[0])
-    imp_concordance = float(result_frame['concordance_imputed'].iloc[0])
+    wgs_concordance = float(result_frame['concordant_wgs'].iloc[0])
+    imp_concordance = float(result_frame['concordant_imputed'].iloc[0])
     annotation_text = ""
     if not np.isnan(wgs_concordance):
         annotation_text += f"Concordance with WGS: {wgs_concordance:.2f}%<br>"
