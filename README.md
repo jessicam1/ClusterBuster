@@ -107,6 +107,25 @@ bash plot_snp_figures.sh \
     --plot_wgs_individual \
     --plot_full_figure
 ```
+### Flag SNPs with Suspicious Genotype Clustering Behavior
+**EXPERIMENTAL**<br>
+Flag snpIDs as suspicious if genotypes don't cluster well (R versus Theta from snp metrics). User can set their own thresholds for each criteria.
+Running this script requires a CSV with snpID, R, Theta, and either a genotype column or A1counts column (requires ALLELE_A column).
+If user specifies A1counts column, user can also have the column rounded using --round counts.
+* SNPs are flagged if genotype centroids are too close, indicating genotype mixing within the same area (default 0.15)
+* SNPs are flagged if genotype clusters are particularly wide (Theta), indicating genotypes spread across R-Theta plot (default 0.4)
+* SNPs are flagged if a genotype centroid is very low (low R value), indicating possible dead probe (default 0.15)
+
+Run the python file:
+```
+python flag_suspicious_snps.py \
+    --calls {snp_csv} \
+    --genotype_column {gt} \
+    --centroid_distance_threshold 0.15 \
+    --cluster_width_threshold 0.4 \
+    --dead_probe_threshold 0.15 \
+    --output {output_csv}
+```
 ### Notebooks
 In the analysis folder are two provided notebooks.
 ```
